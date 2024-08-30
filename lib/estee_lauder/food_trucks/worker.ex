@@ -1,4 +1,4 @@
-defmodule EsteeLauder.FoodTruck.Worker do
+defmodule EsteeLauder.FoodTrucks.Worker do
   use GenServer
   require Logger
 

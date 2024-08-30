@@ -1,4 +1,4 @@
-defmodule EsteeLauder.FoodTruck.ReqBehaviour do
+defmodule EsteeLauder.FoodTrucks.ReqBehaviour do
   @callback new(keyword()) :: any()
   @callback get(any()) ::
               {:ok, %Req.Response{status: integer(), body: binary()}} | {:error, any()}

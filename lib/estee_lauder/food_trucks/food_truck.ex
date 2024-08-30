@@ -1,4 +1,4 @@
-defmodule EsteeLauder.FoodTruck do
+defmodule EsteeLauder.FoodTrucks.FoodTruck do
   use Ecto.Schema
   import Ecto.Changeset
 

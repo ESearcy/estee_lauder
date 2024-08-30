@@ -20,12 +20,6 @@ defmodule EsteeLauderWeb.Router do
     resources "/food_trucks", FoodTruckController, except: [:new, :edit]
   end
 
-  scope "/", EsteeLauderWeb do
-    pipe_through :browser
-
-    get "/", FoodTrucksController, :home
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", EsteeLauderWeb do
   #   pipe_through :api

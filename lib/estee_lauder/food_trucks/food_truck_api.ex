@@ -1,10 +1,11 @@
-defmodule EsteeLauder.FoodTruck.FoodTruckAPI do
+defmodule EsteeLauder.FoodTrucks.FoodTruckAPI do
   @moduledoc """
   This module is meant solely to fetch the food truck data.
   With any authenticated API, we'd store the credentials in our env vars and load them through the application configuration but that's not needed here.
   """
 
   alias Httpoison
+  alias EsteeLauder.FoodTrucks.FoodTruck
   require OpenTelemetry.Tracer, as: Tracer
   require Logger
 
@@ -48,7 +49,7 @@ defmodule EsteeLauder.FoodTruck.FoodTruckAPI do
     |> map_rows_to_columns
     |> Enum.map(fn request ->
       request
-      |> EsteeLauder.FoodTruck.transform_keys()
+      |> FoodTruck.transform_keys()
       |> cast_to_struct()
     end)
   end
@@ -90,7 +91,7 @@ defmodule EsteeLauder.FoodTruck.FoodTruckAPI do
   end
 
   defp cast_to_struct(details) do
-    EsteeLauder.FoodTruck.changeset(%EsteeLauder.FoodTruck{}, details)
+    FoodTruck.changeset(%FoodTruck{}, details)
     |> Ecto.Changeset.apply_changes()
   end
 end
