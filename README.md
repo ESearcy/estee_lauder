@@ -57,20 +57,20 @@ This intial design of using a cache instead of perminant db storage was to give 
 Since there are no requirements about the user interfacing with the data, persisting state didn't seem like a valuable use of time. that said, I do have "next steps" at the end of this.
 
 dev tools & apps:
--- docker-compose: used for setting up db & dev tools.
--- postgres: our db
--- jeager-all-in-one: this lets us collect and view traces from our application. this is extremely helpful for debugging locally. for prod we'd use lightstep or something similar instead of jeager-all-in-one
--- vs-code: not required but is what I use
+
+- docker-compose: used for setting up db & dev tools.
+- postgres: our db
+- jeager-all-in-one: this lets us collect and view traces from our application. this is extremely helpful for debugging locally. for prod we'd use lightstep or something similar instead of jeager-all-in-one
+- vs-code: not required but is what I use
 
 To complete this challange I decided to go with a cachex based approach for managing the food truck data.
--- Cachex is backed by ETS, allowing for an easy-to-use interface sitting upon extremely well tested tools. (from hex docs). I also just like the interface.
--- The number of records from the api didn't seem excessive (490), so storing in memory didn't seem like it would be an issue.
--- I could have gone with ecto for storing the records but since we already have direct access to the true data, but worrying about data sync and consistency within our db seemed like overkill.
--- For tests, I've loaded the latest data from the foodtruck endpoint and dumped it to a local file. this dump can optionally be used for local development too.
+
+- Cachex is backed by ETS, allowing for an easy-to-use interface sitting upon extremely well tested tools. (from hex docs). I also just like the interface.
+- The number of records from the api didn't seem excessive (490), so storing in memory didn't seem like it would be an issue.
+- I could have gone with ecto for storing the records but since we already have direct access to the true data, but worrying about data sync and consistency within our db seemed like overkill.
+- For tests, I've loaded the latest data from the foodtruck endpoint and dumped it to a local file. this dump can optionally be used for local development too.
 
 For Presenting the data, I went with a simple liveview page
--- This can be accessed here: http://localhost:4000/
--- The Developer Jeager UI is also available here: http://localhost:16686/search. this can be used to explore the traces collected by the app while you're using it.
 
-Where Am I?
-backup code and use api generator function.
+- This can be accessed here: http://localhost:4000/
+- The Developer Jeager UI is also available here: http://localhost:16686/search. this can be used to explore the traces collected by the app while you're using it.
