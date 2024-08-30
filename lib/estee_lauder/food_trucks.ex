@@ -31,6 +31,7 @@ defmodule EsteeLauder.FoodTrucks do
     end
   end
 
+  @spec check_then_cache(data :: map(), cache :: atom()) :: nil
   def check_then_cache(%{status: "APPROVED"} = request, cache) do
     span_attribs = %{locationid: request.locationid, applicant: request.applicant}
 
@@ -51,6 +52,7 @@ defmodule EsteeLauder.FoodTrucks do
     {:ok, Cachex.stream!(cache) |> Enum.map(fn {_, id, _, _, data} -> {id, data} end)}
   end
 
+  @spec list_all_taco_trucks(cache :: atom()) :: {:ok, list()}
   def list_all_taco_trucks(cache \\ @cache) do
     data =
       Cachex.stream!(cache)

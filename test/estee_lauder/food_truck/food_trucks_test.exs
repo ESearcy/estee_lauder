@@ -33,7 +33,7 @@ defmodule EsteeLauder.FoodTrucksTest do
     # test "caches approved request if not already cached", %{cache: cache} do
     #   request = %{status: "APPROVED", locationid: "123", applicant: "Test Applicant"}
 
-    #   FoodTrucks.check_then_cache(request, cache)
+    #   FoodTrucks.check_then_cache(request, cache)estee_lauder
 
     #   assert {:ok, ^request} = Cachex.get(cache, request.locationid)
     # end

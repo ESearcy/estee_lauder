@@ -13,6 +13,7 @@ defmodule EsteeLauder.FoodTrucks.FoodTruckAPI do
   @expected_column_header "locationid,Applicant,FacilityType,cnn,LocationDescription,Address,blocklot,block,lot,permit,Status,FoodItems,X,Y,Latitude,Longitude,Schedule,dayshours,NOISent,Approved,Received,PriorPermit,ExpirationDate,Location,Fire Prevention Districts,Police Districts,Supervisor Districts,Zip Codes,Neighborhoods (old)"
   @http_status_ok 200
 
+  @spec fetch_data(http_client :: module()) :: {:ok, list(FoodTruck.t())} | {:error, any()}
   def fetch_data(http_client \\ Req) do
     Tracer.with_span "fetch data from https://data.sfgov.org" do
       case http_client.new(
