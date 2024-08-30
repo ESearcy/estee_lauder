@@ -1,4 +1,4 @@
-defmodule EsteeLauder.FoodTruck.Supervisor do
+defmodule EsteeLauder.FoodTrucks.Supervisor do
   use Supervisor
 
   def start_link(state) do
@@ -11,9 +11,9 @@ defmodule EsteeLauder.FoodTruck.Supervisor do
 
     children = [
       {Cachex, name: :food_trucks},
-      {EsteeLauder.FoodTruck.Worker, state}
+      {EsteeLauder.FoodTrucks.Worker, state}
     ]
 
-    Supervisor.init(children, strategy: :one_for_one, name: EsteeLauder.FoodTruck.Supervisor)
+    Supervisor.init(children, strategy: :one_for_one, name: EsteeLauder.FoodTrucks.Supervisor)
   end
 end

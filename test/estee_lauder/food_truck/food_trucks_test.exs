@@ -17,7 +17,7 @@ defmodule EsteeLauder.FoodTrucksTest do
     test "is able to list approved food truck requests" do
       FoodTrucks.load_schedule_data(%{load_type: :dump, path: "./dumps"})
 
-      [{id, _} | _rest] = FoodTrucks.list_all()
+      {:ok, [{id, _} | _rest]} = FoodTrucks.list_all()
       assert id == "1735284"
     end
   end

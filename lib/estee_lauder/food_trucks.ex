@@ -20,7 +20,7 @@ defmodule EsteeLauder.FoodTrucks do
     Tracer.with_span "Food Trucks Load Data" do
       Cachex.clear(cache)
 
-      case EsteeLauder.FoodTruck.FoodTruckAPI.fetch_data() do
+      case EsteeLauder.FoodTrucks.FoodTruckAPI.fetch_data() do
         {:ok, schedule_requests} ->
           schedule_requests
           |> Enum.each(&check_then_cache(&1, cache))
@@ -47,17 +47,7 @@ defmodule EsteeLauder.FoodTrucks do
 
   def check_then_cache(_data, _cache), do: nil
 
-  def get_locations_with_reservations(cache \\ @cache) do
-    Cachex.keys(cache)
-  end
-
-  def get_location_reservation_details(cache \\ @cache, locationid) do
-    Tracer.with_span "get_location_reservation_details", %{locationid: locationid} do
-      Cachex.get(cache, locationid)
-    end
-  end
-
   def list_all(cache \\ @cache) do
-    Cachex.stream!(cache) |> Enum.map(fn {_, id, _, _, data} -> {id, data} end)
+    {:ok, Cachex.stream!(cache) |> Enum.map(fn {_, id, _, _, data} -> {id, data} end)}
   end
 end

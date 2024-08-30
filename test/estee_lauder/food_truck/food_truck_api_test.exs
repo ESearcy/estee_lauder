@@ -1,7 +1,7 @@
-defmodule EsteeLauder.FoodTruck.FoodTruckAPITest do
+defmodule EsteeLauder.FoodTrucks.FoodTruckAPITest do
   use ExUnit.Case, async: true
   import Mox
-  alias EsteeLauder.FoodTruck.FoodTruckAPI
+  alias EsteeLauder.FoodTrucks.FoodTruckAPI
 
   setup :verify_on_exit!
 
@@ -10,7 +10,7 @@ defmodule EsteeLauder.FoodTruck.FoodTruckAPITest do
   1,Test Truck,Truck,123,Test Location,123 Test St,1234,123,4,12345,APPROVED,Test Food,0,0,37.7749,-122.4194,Test Schedule,Test Hours,,2021-01-01,2020-01-01,2021-01-01,POINT (-122.4194 37.7749),1,1,1,94103,Test Neighborhood
   """
 
-  @expected_struct %EsteeLauder.FoodTruck{
+  @expected_struct %EsteeLauder.FoodTrucks.FoodTruck{
     address: "123 Test St",
     applicant: "Test Truck",
     approved: "2021-01-01",

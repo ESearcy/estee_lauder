@@ -19,7 +19,7 @@ defmodule EsteeLauder.Application do
       EsteeLauder.Repo,
       {DNSCluster, query: Application.get_env(:estee_lauder, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: EsteeLauder.PubSub},
-      EsteeLauder.FoodTruck.Supervisor,
+      EsteeLauder.FoodTrucks.Supervisor,
       # Start the Finch HTTP client for sending emails
       {Finch, name: EsteeLauder.Finch},
       # Start a worker by calling: EsteeLauder.Worker.start_link(arg)
