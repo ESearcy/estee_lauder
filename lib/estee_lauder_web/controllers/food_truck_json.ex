@@ -1,6 +1,4 @@
 defmodule EsteeLauderWeb.FoodTruckJSON do
-  alias EsteeLauder.FoodTrucks.FoodTruck
-
   @doc """
   Renders a list of food_trucks.
   """
@@ -20,8 +18,8 @@ defmodule EsteeLauderWeb.FoodTruckJSON do
       location_id: location_id,
       name: food_truck.applicant,
       location_description: food_truck.location_description,
-       food_items: food_truck.food_items,
-       schedule: "At Location till #{food_truck.expiration_date}"
+      food_items: food_truck.food_items,
+      schedule: "At Location till #{food_truck.expiration_date}"
     }
   end
 end

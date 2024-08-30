@@ -50,4 +50,15 @@ defmodule EsteeLauder.FoodTrucks do
   def list_all(cache \\ @cache) do
     {:ok, Cachex.stream!(cache) |> Enum.map(fn {_, id, _, _, data} -> {id, data} end)}
   end
+
+  def list_all_taco_trucks(cache \\ @cache) do
+    data =
+      Cachex.stream!(cache)
+      |> Enum.map(fn {_, id, _, _, data} -> {id, data} end)
+      |> Enum.filter(fn {_, data} ->
+        String.downcase(data.food_items) |> String.contains?("tacos")
+      end)
+
+    {:ok, data}
+  end
 end

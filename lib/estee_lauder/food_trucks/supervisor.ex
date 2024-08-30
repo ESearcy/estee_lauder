@@ -5,9 +5,11 @@ defmodule EsteeLauder.FoodTrucks.Supervisor do
     Supervisor.start_link(__MODULE__, state)
   end
 
+  require Logger
+
   @impl true
   def init(state \\ %{}) do
-    IO.inspect("Starting FoodTruck Supervisor (cache & worker)")
+    Logger.info("Starting FoodTruck Supervisor (cache & worker)")
 
     children = [
       {Cachex, name: :food_trucks},

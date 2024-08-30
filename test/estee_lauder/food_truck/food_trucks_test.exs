@@ -1,7 +1,7 @@
 defmodule EsteeLauder.FoodTrucksTest do
   use ExUnit.Case, async: true
   import Mox
-  import ExUnit.CaptureLog
+ # import ExUnit.CaptureLog
   alias EsteeLauder.FoodTrucks
 
   setup :verify_on_exit!
@@ -28,7 +28,7 @@ defmodule EsteeLauder.FoodTrucksTest do
       {:ok, cache: cache}
     end
 
-    #ToDo: something going on with these, need to debug later if there is time.
+    # ToDo: something going on with these, need to debug later if there is time.
 
     # test "caches approved request if not already cached", %{cache: cache} do
     #   request = %{status: "APPROVED", locationid: "123", applicant: "Test Applicant"}
@@ -51,6 +51,6 @@ defmodule EsteeLauder.FoodTrucksTest do
   end
 
   def list_all_from_cache(cache_name) do
-    cache_name |> Cachex.stream! |> Enum.to_list
+    cache_name |> Cachex.stream!() |> Enum.to_list()
   end
 end

@@ -83,7 +83,9 @@ FoodTrucks (service module):
 - This module uses the food_truck_api module to fetch the data from the 3rd party api & uses cachex to store and fetch that data as needed.
 - While the API module fetches all data.. this service module filters out any non approved requests so we're only looking at confirmed food truck locations.
 
-For Presenting the data, I went with a simple api. (I was going over time at this point; though I would have preferred to craete a liveview page for displaying the data.)
+For Presenting the data, I went with a simple api.
+this api only returns taco trucks, of which only 34 have APPROVED requests. so that is what you will see from the api.
+(I was going over time at this point; though I would have preferred to craete a liveview page for displaying the data.)
 
 you can hit this api using:
 

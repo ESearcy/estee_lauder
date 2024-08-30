@@ -7,7 +7,6 @@ defmodule EsteeLauder.Application do
 
   @impl true
   def start(_type, _args) do
-    IO.inspect(Application.get_env(:estee_lauder, EsteeLauder.Repo), label: "Database Config")
     :ok = Application.ensure_started(:tls_certificate_check)
 
     :opentelemetry_cowboy.setup()
