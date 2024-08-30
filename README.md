@@ -53,13 +53,18 @@ iex -S mix phx.server
 
 ## General Design
 
-This intial design of using a cache instead of perminant db storage was to give me a bit more freedom to play around with and understand the data while I worked on the challenge.
-Since there are no requirements about the user interfacing with the data, persisting state didn't seem like a valuable use of time. that said, I do have "next steps" at the end of this.
+This intial design of using a cache instead of perminant db storage was to give me a bit more freedom to play around with and understand the data while I worked on the challenge since time was limited.
+
+While my project here does have an api for fetching the data, my focus was tilted a bit towards "best practices" for when setting up a new project. (by including some observability in the app via opentelemetry, and using a cache to store 3rd party data)
+
+```
+curl --location --request GET 'http://localhost:4000/api/food_trucks' --header 'Content-Type: application/json'
+```
 
 dev tools & apps:
 
 - docker-compose: used for setting up db & dev tools.
-- postgres: our db
+- postgres: our db (we don't actually use it yet)
 - jeager-all-in-one: this lets us collect and view traces from our application. this is extremely helpful for debugging locally. for prod we'd use lightstep or something similar instead of jeager-all-in-one
 - vs-code: not required but is what I use
 
@@ -70,7 +75,22 @@ To complete this challange I decided to go with a cachex based approach for mana
 - I could have gone with ecto for storing the records but since we already have direct access to the true data, but worrying about data sync and consistency within our db seemed like overkill.
 - For tests, I've loaded the latest data from the foodtruck endpoint and dumped it to a local file. this dump can optionally be used for local development too.
 
-For Presenting the data, I went with a simple liveview page
+the Process flow food_truck data is as such:
+FoodTruck.Supervisor: starts our data polling worker and initilizes the cache.
+FoodTruck.Worker: using the FoodTrucks 'service module', this worker polls the data from the api and stores it in the cache every 30 mins.
+FoodTrucks (service module):
 
-- This can be accessed here: http://localhost:4000/
+- This module uses the food_truck_api module to fetch the data from the 3rd party api & uses cachex to store and fetch that data as needed.
+- While the API module fetches all data.. this service module filters out any non approved requests so we're only looking at confirmed food truck locations.
+
+For Presenting the data, I went with a simple api. (I was going over time at this point; though I would have preferred to craete a liveview page for displaying the data.)
+
+you can hit this api using:
+
+```
+curl --location --request GET 'http://localhost:4000/api/food_trucks' --header 'Content-Type: application/json'
+```
+
+as you use the app and data loads, you will see events & traces show up in the Jeager UI
+
 - The Developer Jeager UI is also available here: http://localhost:16686/search. this can be used to explore the traces collected by the app while you're using it.
